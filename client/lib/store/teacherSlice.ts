@@ -20,8 +20,11 @@ const teacherSlice = createSlice({
 
  //destructure :
  const {setTeacherName,setTeacherPassword} = teacherSlice.actions
- setTeacherName()
-
+export default teacherSlice.reducer
+export{
+  setTeacherName,
+  setTeacherPassword
+}
 //note :
 // redux ma action pani aafailey configure garna parthiyo, but redux toolkit ley action aafai banayera dinxa manually banauna pardaina
 
@@ -35,6 +38,6 @@ const teacherSlice = createSlice({
 // }
 //createSlice function always returns an object jaha vitra actions haru automatic generate bhayera aaerako hunxa
 
-Flow:
-reducers banney bittikai action create hunxa 
-kunai reducer lai communication garnu parney xa bhani, jun same name ko action baneko xa tyeslai call garnu parxa, jahily pani action hunxa reducer haina 
+// Flow:
+// reducers banney bittikai action create hunxa 
+// kunai reducer lai communication garnu parney xa bhani, jun same name ko action baneko xa tyeslai call garnu parxa, jahily pani action hunxa reducer haina 
