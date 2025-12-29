@@ -4,11 +4,12 @@ import { useAppSelector } from "@/lib/store/hooks"
 import { useSelector } from "react-redux"
 
 function Haha(){
-  const data = useAppSelector((store)=>store.teacher)
-
+  
   //Alternate:
   // const {teacherName, teacherAddress} = useSelector((store)=>store.teacher)
   
+  const data = useAppSelector((store)=>store.teacher)
+
   // data ma k k hunxa bhanda 
   // data = {
   //   teacherName, 

@@ -41,3 +41,9 @@ export{
 // Flow:
 // reducers banney bittikai action create hunxa 
 // kunai reducer lai communication garnu parney xa bhani, jun same name ko action baneko xa tyeslai call garnu parxa, jahily pani action hunxa reducer haina 
+
+function registerTeacher(){
+  return async function registerTeacherThunk(){
+    
+  }
+}
