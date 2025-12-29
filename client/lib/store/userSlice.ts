@@ -19,9 +19,10 @@ const userSlice = createSlice({
     }
   }
 })
+// dispatch(setName("Soniya"))
+// dispatch(setAddress("Bhaktapur"))
+
 const {setName, setAddress} = userSlice.actions
-dispatch(setName("Soniya"))
-dispatch(setAddress("Bhaktapur"))
 export default userSlice.reducer
 export{
   setName,

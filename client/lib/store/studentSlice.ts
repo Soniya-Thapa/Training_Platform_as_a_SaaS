@@ -15,11 +15,11 @@ const studentSlice = createSlice({
   }
 })
 const {setData} = studentSlice.actions
-dispatch(setData({
-  name : "Soniya",
-  address :"Bhaktapur",
-  age : 22
-}))
+// dispatch(setData({
+//   name : "Soniya",
+//   address :"Bhaktapur",
+//   age : 22
+// }))
 export default studentSlice.reducer
 export {
   setData
