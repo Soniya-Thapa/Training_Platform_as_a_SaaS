@@ -15,17 +15,17 @@ import teacherRoutes from "../src/route/teacher/teacher.route"
 
 app.use(express.json()) //done for parsing data(json data)
 
-app.use("/auth",authRoutes)
+app.use("/api/auth",authRoutes)
 
 //institutes routes
-app.use("/institute",instituteRoutes)
-app.use("/institute/course",courseInstituteRoutes)
-app.use("/institute/student",studentInstituteRoutes)
-app.use("/institute/teacher",teacherInstituteRoutes)
-app.use("/institute/category",categoryInstituteRoutes)
+app.use("/api/institute",instituteRoutes)
+app.use("/api/institute/course",courseInstituteRoutes)
+app.use("/api/institute/student",studentInstituteRoutes)
+app.use("/api/institute/teacher",teacherInstituteRoutes)
+app.use("/api/institute/category",categoryInstituteRoutes)
 
 //teacher routes
-app.use("/teacher",teacherRoutes)
+app.use("/api/teacher",teacherRoutes)
 
 export default app
 

@@ -2,15 +2,15 @@
 //you need to include all the slice here to insert or use the data
 
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./userSlice"
-import studentSlice from "./studentSlice"
-import teacherSlice from "./teacherSlice"
+import authSlice from "./auth/authSlice"
+import teacherSlice from "./teacher/teacherSlice"
+import instituteSlice from "./institute/instituteSlice"
 
 const store = configureStore({
-  reducer:{
-    user : userSlice,
-    student : studentSlice,
-    teacher : teacherSlice
+  reducer: {
+    auth: authSlice,
+    teacher : teacherSlice,
+    institute : instituteSlice
   }
 })
 export default store

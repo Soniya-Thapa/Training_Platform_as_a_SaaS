@@ -101,7 +101,7 @@ class AuthController {
       const isPasswordMatch = bcrypt.compareSync(password, data[0].password)
       if (isPasswordMatch) {
         const token =await generateJwtToken({ id: data[0].id}) //HS256 algorithm is used here
-        console.log("asdfghjkl",token)
+        // console.log("asdfghjkl",token)
         res.status(200).json({
           token,
           message: "logged in "
