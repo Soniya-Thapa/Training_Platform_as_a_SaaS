@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IInitialState, IUserData } from "./authSlice.types";
+import { IInitialState, IRegisterData, IUserData } from "./authSlice.types";
 import { Status } from "@/lib/types/types";
+import { AppDispatch } from "../store";
+import API from "@/lib/http";
+import { ILoginData } from "@/app/auth/login/login.types";
 
 const initialState : IInitialState={
   user : {
@@ -24,3 +27,35 @@ const authSlice = createSlice({
 
 const {setUser, setStatus} = authSlice.actions
 export default authSlice.reducer
+
+export function registerUser(data : IRegisterData){
+  return async function registerUserThunk(dispatch:AppDispatch) {
+    try {
+      const response = await API.post("auth/register",data)
+      if(response.status === 201){
+        dispatch(setStatus(Status.SUCCESS))
+      }else{
+        dispatch(setStatus(Status.ERROR))
+      }
+    } catch (error) {
+      console.log(error)
+      dispatch(setStatus(Status.ERROR))
+    }
+  }
+}
+
+export function loginUser(data:ILoginData){
+  return async function loginUserThunk(dispatch:AppDispatch){
+    try {
+      const response = await API.post("auth/login",data)
+      if(response.status === 200){
+        dispatch(setStatus(Status.SUCCESS))
+      }else{
+        dispatch(setStatus(Status.ERROR))
+      }
+    } catch (error) {
+      console.log(error)
+      dispatch(setStatus(Status.ERROR))
+    }
+  }
+}

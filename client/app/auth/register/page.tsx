@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { IRegisterData } from "./register.types"
+import { registerUser } from "@/lib/store/auth/authSlice"
+import { Status } from "@/lib/types/types"
+import { useAppDispatch } from "@/lib/store/hooks"
 
 function register() {
+  const dispatch = useAppDispatch()
   //user ley k k type garxa input field ma tyo track garera store garney
   const [data,setData]=useState<IRegisterData>({
     username : "",
@@ -19,6 +23,11 @@ function register() {
     })
   }
   const handleRegisterSubmission = (e : FormEvent<HTMLFormElement>)=>{
+    //api call 
+    dispatch(registerUser(data))
+    if(status === Status.SUCCESS){
+
+    }
   }
   return (
     <div className="bg-gray-100 flex h-screen items-center justify-center px-4 sm:px-6 lg:px-8">

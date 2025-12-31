@@ -25,3 +25,4 @@ const teacherSlice = createSlice({
 
 const {setTeacher, setStatus} = teacherSlice.actions
 export default teacherSlice.reducer
+
