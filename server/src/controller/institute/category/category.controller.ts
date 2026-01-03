@@ -16,8 +16,18 @@ const createCategory = async (req:IExtendedRequest, res:Response, next: NextFunc
     type: QueryTypes.INSERT,
     replacements:[categoryName, categoryDescription]
   })
+  const[categoryData] : {id:string, createdAt : Date}[]= await sequelize.query(`SELECT id, createdAt from category_${instituteNumber} WHERE categoryName=?`,{
+    replacements:[categoryName],
+    type: QueryTypes.SELECT
+  })
   res.status(200).json({
-    message :"Category added successfully."
+    message :"Category added successfully.",
+    data : {
+      id : categoryData.id,
+      categoryName,
+      categoryDescription,
+      createdAt : categoryData.createdAt
+    }
   })
 }
 
@@ -43,15 +53,21 @@ const getAllCategories = async (req:IExtendedRequest, res:Response, next: NextFu
 const deleteCategory = async (req: IExtendedRequest, res: Response) => {
       const instituteNumber = req.user?.currentInstituteNumber
   const categoryId = req.params.id
-  const categoryData = await sequelize.query(`SELECT *FROM category_${instituteNumber} where id=${categoryId}`,{
-    type: QueryTypes.SELECT 
-  }) 
+ const categoryData = await sequelize.query(
+  `SELECT * FROM category_${instituteNumber} WHERE id = ?`,
+  { replacements: [categoryId], type: QueryTypes.SELECT }
+);
+
   if (categoryData.length == 0) {
     return res.status(404).json({
       message: "No category found with that id."
     })
   }
-  await sequelize.query(`DELETE FROM category_${instituteNumber} WHERE id = ${categoryId}`)
+await sequelize.query(
+  `DELETE FROM category_${instituteNumber} WHERE id = ?`,
+  { replacements: [categoryId] }
+);
+
   res.status(200).json({
     message: "Category deleted successfully."
   })
@@ -60,7 +76,11 @@ const deleteCategory = async (req: IExtendedRequest, res: Response) => {
 const getSingleCategory = async (req: IExtendedRequest, res: Response) => {
   const instituteNumber = req.user?.currentInstituteNumber
   const categoryId = req.params.id
-  const [categoryData] = await sequelize.query(`SELECT *FROM category_${instituteNumber} WHERE id= ${categoryId}`)
+  const categoryData = await sequelize.query(
+  `SELECT * FROM category_${instituteNumber} WHERE id = ?`,
+  { replacements: [categoryId], type: QueryTypes.SELECT }
+);
+
   if (categoryData.length == 0) {
     return res.status(404).json({
       message: "No category found with that id."
