@@ -1,22 +1,13 @@
 import { Status } from "@/lib/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../../store";
-import API from "@/lib/http";
 import { IInstituteCourseInitialData } from "./institute-course-type";
+import API from "@/lib/http/api";
 
 
 const initialState : IInstituteCourseInitialData ={
   status : Status.LOADING,
-  courses:[{
-    courseName : "nodejs",
-    coursePrice : "999",
-    id : "1"
-  },{
-    courseName : "nodejs",
-    coursePrice : "999",
-    id : "2"
-  }
-]
+  courses:[]
 }
 const instituteCourseSlice = createSlice({
   name : "institute-course-slice",
@@ -31,13 +22,17 @@ const instituteCourseSlice = createSlice({
    setDeleteCourse(state, action:PayloadAction<string>){
     // hamley delete garda store(frontend) bata pani hatauna parxa
     const index = state.courses.findIndex(course => course.id = action.payload) // 0
-    state.courses.splice(index, 1) //0,1 means it cut 0 index only
+    if(index != -1){
+      state.courses.splice(index, 1) //0,1 means it cut 0 index only
+    }
    },
    setEditCourse(state, action:PayloadAction<any>){
     const id = action.payload.id 
     const data = action.payload.data
     const index = state.courses.findIndex(course => course.id = id) // 0
-    state.courses[index]=data
+    if(index != -1){
+      state.courses[index]=data
+    }
    }
   }
 })

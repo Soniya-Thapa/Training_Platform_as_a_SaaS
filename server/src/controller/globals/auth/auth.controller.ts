@@ -103,7 +103,10 @@ class AuthController {
         const token =await generateJwtToken({ id: data[0].id}) //HS256 algorithm is used here
         // console.log("asdfghjkl",token)
         res.status(200).json({
-          token,
+          data :{
+            token,
+            username : data[0].username
+          },
           message: "logged in "
         })
       }

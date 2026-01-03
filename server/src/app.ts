@@ -13,7 +13,14 @@ import categoryInstituteRoutes from "./route/institute/category/category.route"
 //teacher routes
 import teacherRoutes from "../src/route/teacher/teacher.route"
 
+import cors from "cors"
+
 app.use(express.json()) //done for parsing data(json data)
+
+//cors config
+app.use(cors({
+  origin :"http://localhost:3000"
+}))
 
 app.use("/api/auth",authRoutes)
 

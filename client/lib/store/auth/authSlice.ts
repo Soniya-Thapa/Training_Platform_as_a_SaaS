@@ -2,13 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IInitialState, IRegisterData, IUserData } from "./authSlice.types";
 import { Status } from "@/lib/types/types";
 import { AppDispatch } from "../store";
-import API from "@/lib/http";
 import { ILoginData } from "@/app/auth/login/login.types";
+import API from "@/lib/http/api";
+import APIWITHTOKEN from "@/lib/http/apiWithToken";
 
 const initialState : IInitialState={
   user : {
     username :"",
-    password : ""
+    token :""
   },
   status : Status.LOADING
 }
@@ -47,8 +48,10 @@ export function registerUser(data : IRegisterData){
 export function loginUser(data:ILoginData){
   return async function loginUserThunk(dispatch:AppDispatch){
     try {
-      const response = await API.post("auth/login",data)
+      const response = await APIWITHTOKEN.post("auth/login",data)
       if(response.status === 200){
+        dispatch(setUser(response.data.data))
+        localStorage.setItem("token",response.data.data.token)
         dispatch(setStatus(Status.SUCCESS))
       }else{
         dispatch(setStatus(Status.ERROR))

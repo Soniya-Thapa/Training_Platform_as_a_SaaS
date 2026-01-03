@@ -5,12 +5,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./auth/authSlice"
 import teacherSlice from "./teacher/teacherSlice"
 import instituteSlice from "./institute/instituteSlice"
+import categorySlice from "./institute/category/institute-category-slice"
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
     teacher : teacherSlice,
-    institute : instituteSlice
+    institute : instituteSlice,
+    category : categorySlice
   }
 })
 export default store
